@@ -5,7 +5,7 @@
 This lab gives us an introduction to the Nexys A-7 FPGA.  The first part of the lab is a LED decoder, that allows switches to control what digits are produced from the LEDs.  
 
 The second part of the lab involves a hex counter, which counts 0 to F in order at the rightmost position.  We were tasked with changing the speed of the counter and changing the position of the counter. We were able to create a counter with increased counting speed and will change positions from right to left until looping back.
-
+---
 In counter.vhd, the `cnt <= cnt + 2; ` line was changed from `cnt <= cnt + 1; ` to increase the speed of the counter.
 
 ```
@@ -17,7 +17,7 @@ BEGIN
 		END IF;
 	END PROCESS; 
 ```
-
+---
 In hexcount.vhd, we added additional signals to enable us to manipulate the display location of the counter, 'spot' is a larger signal to help manipulate the speed at which the display will change. Using code inspired from counter.vhd, we created a counter for the display location and used a much larger value to reduce the speed at which the counter will change positions. The counter counts up to 28, though the 'dig' signal will only read changes from the final 3 bits, thus having a reduced speed to make changes to the position noticable.
 
 ```
