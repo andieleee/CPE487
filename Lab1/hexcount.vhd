@@ -27,17 +27,17 @@ ARCHITECTURE Behavioral OF hexcount IS
 	END COMPONENT;
 	SIGNAL S : STD_LOGIC_VECTOR (3 DOWNTO 0);
 	SIGNAL dig: std_logic_vector (2 downto 0);
-    SIGNAL spot: std_logic_vector (28 downto 0);
+    	SIGNAL spot: std_logic_vector (28 downto 0); -- additional signal to manipulate 'dig' location
 BEGIN
 	C1 : counter
 	PORT MAP(clk => clk_100MHz, count => S);
 	L1 : leddec
 	PORT MAP(dig => dig, data => S, anode => anode, seg => seg);
-	PROCESS (spot)
+	PROCESS (spot) -- additional process added to change which segment the display is on
 	BEGIN
 		IF rising_edge(clk_100MHz) THEN -- on rising edge of clock
 			spot <= spot + 1; -- increment counter
 		END IF;
 	END PROCESS;
-	dig  <= spot (28 downto 26);
+	dig  <= spot (28 downto 26); -- dig takes the last 3 bits of the larger 'spot signal' to slow down the speed
 END Behavioral;
