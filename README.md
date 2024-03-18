@@ -3,4 +3,4 @@
 
 This is where all our lab submissions will be located.
 
-[](rolling-cat.gif)
+![](rolling-cat.gif)
