@@ -18,6 +18,7 @@ BEGIN
 		END IF;
 	END PROCESS; 
 ```
+
 ---
 In hexcount.vhd, we added additional signals to enable us to manipulate the display location of the counter, 'spot' is a larger signal to help manipulate the speed at which the display will change. Using code inspired from counter.vhd, we created a counter for the display location and used a much larger value to reduce the speed at which the counter will change positions. The counter counts up to 28, though the 'dig' signal will only read changes from the final 3 bits, thus having a reduced speed to make changes to the position noticable.
 
@@ -39,6 +40,7 @@ BEGIN
 	dig  <= spot (28 downto 26); -- dig takes the last 3 bits of the larger 'spot signal' to slow down the speed
 END Behavioral;
 ```
+
 ---
 Here is a video of the results:
 
