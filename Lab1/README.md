@@ -31,3 +31,8 @@ BEGIN
 END Behavioral;
 ```
 This block of VHDL changes the location of the number in the LED.
+
+
+
+https://github.com/andieleee/CPE487/assets/116908446/a4831a6f-cf2b-4011-8f87-eadcf1722dbe
+
