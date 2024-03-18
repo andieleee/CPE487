@@ -15,7 +15,7 @@ BEGIN
 	PROCESS (clk)
 	BEGIN
 		IF rising_edge(clk) THEN -- on rising edge of clock
-			cnt <= cnt + 2; -- increment counter
+			cnt <= cnt + 2; -- count changed from +1 to +2 to increase speed of counter
 		END IF;
 	END PROCESS;
 	count <= cnt (28 DOWNTO 25);
