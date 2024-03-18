@@ -4,7 +4,7 @@
 
 This is where all our lab submissions will be located.
 
-##Labs
+## Labs
   1. [Lab 1](https://github.com/andieleee/CPE487/tree/main/Lab1)
 
 
