@@ -1,5 +1,7 @@
 # Lab 1
 
+> We pledge our honor that we have abided by the Stevens Honor System - Andrew Lee and Kavin Mohan
+
 This lab gives us an introduction to the Nexys A-7 FPGA.  The first part of the lab is a LED decoder, that allows switches to control what digits are produced from the LEDs.  
 
 The second part of the lab involves a hex counter, which counts 0 to F in order at the rightmost position.  We were tasked with changing the speed of the counter and changing the position of the counter. We were able to create a counter with increased counting speed and will change positions from right to left until looping back.
