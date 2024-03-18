@@ -15,7 +15,8 @@ BEGIN
 ```
 The `cnt <= cnt + 2; ` line was changed from `cnt <= cnt + 1; ` to increase the speed of the counter.
 
-`BEGIN
+```
+BEGIN
 	C1 : counter
 	PORT MAP(clk => clk_100MHz, count => S);
 	L1 : leddec
@@ -27,6 +28,6 @@ The `cnt <= cnt + 2; ` line was changed from `cnt <= cnt + 1; ` to increase the 
 		END IF;
 	END PROCESS;
 	dig  <= spot (28 downto 26); -- dig takes the last 3 bits of the larger 'spot signal' to slow down the speed
-END Behavioral;`
-
+END Behavioral;
+```
 This block of VHDL changes the location of the number in the LED.
