@@ -14,3 +14,6 @@ BEGIN
 	END PROCESS; `
 ```
 The `cnt <= cnt + 2; ` line was changed from `cnt <= cnt + 1; ` to increase the speed of the counter.
+
+
+<video src="Lab1/hezxcount.mp4" width="320" height="240" controls></video>
