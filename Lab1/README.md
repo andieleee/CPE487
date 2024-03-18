@@ -11,7 +11,7 @@ BEGIN
 		IF rising_edge(clk) THEN -- on rising edge of clock
 			cnt <= cnt + 2; -- increment counter
 		END IF;
-	END PROCESS; `
+	END PROCESS; 
 ```
 The `cnt <= cnt + 2; ` line was changed from `cnt <= cnt + 1; ` to increase the speed of the counter.
 
