@@ -15,5 +15,18 @@ BEGIN
 ```
 The `cnt <= cnt + 2; ` line was changed from `cnt <= cnt + 1; ` to increase the speed of the counter.
 
+`BEGIN
+	C1 : counter
+	PORT MAP(clk => clk_100MHz, count => S);
+	L1 : leddec
+	PORT MAP(dig => dig, data => S, anode => anode, seg => seg);
+	PROCESS (spot) -- additional process added to change which segment the display is on
+	BEGIN
+		IF rising_edge(clk_100MHz) THEN -- on rising edge of clock
+			spot <= spot + 1; -- increment counter
+		END IF;
+	END PROCESS;
+	dig  <= spot (28 downto 26); -- dig takes the last 3 bits of the larger 'spot signal' to slow down the speed
+END Behavioral;`
 
-<video src="Lab1/hexcount.mp4" width="320" height="240" controls></video>
+This block of VHDL changes the location of the number in the LED.
