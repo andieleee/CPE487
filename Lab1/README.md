@@ -43,6 +43,10 @@ END Behavioral;
 ```
 
 ---
+![](/Lab1/Upload.png)
+
+
+
 Here is a video of the results:
 
 https://github.com/andieleee/CPE487/assets/116908446/a4831a6f-cf2b-4011-8f87-eadcf1722dbe
