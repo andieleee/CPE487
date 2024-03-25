@@ -11,7 +11,7 @@ ENTITY counter IS
 		count : OUT STD_LOGIC_VECTOR (15 DOWNTO 0); -- NEED REVISE! 16 bits
 		mpx : OUT STD_LOGIC_VECTOR (2 DOWNTO 0); -- NEW ONE ADD! send signal to select displays
 		data_out: inout std_logic;
-        data_in: inout std_logic_vector (1 downto 0));
+        data_in: inout std_logic_vector (4 downto 0));
 END counter;
 
 ARCHITECTURE Behavioral OF counter IS
@@ -19,13 +19,10 @@ ARCHITECTURE Behavioral OF counter IS
 	type state_values is (stA,stB,stC,stD,stE);
     signal pres_state, next_state: state_values;
 BEGIN
-	PROCESS (clk,rst)
+	statereg: PROCESS (clk,rst)
 	   variable temp_cnt: unsigned (38 downto 0);
 	BEGIN
 	   if rising_edge(clk) then
-	       if (rst = '0') then
-	       pres_state <= stA;
-		  else
 		    if(data_out = '1') THEN -- on rising edge of clock
 			temp_cnt := unsigned(cnt) - 1; -- increment counter
 			pres_state <= next_state;
@@ -33,10 +30,11 @@ BEGIN
 		    temp_cnt := unsigned(cnt) + 1;
 		    pres_state <= next_state;
 		END IF;
-	END PROCESS;
+		end if;
+	END PROCESS statereg;
 	count <= cnt (38 DOWNTO 23); -- 16 bits
 	mpx <= cnt (19 DOWNTO 17); -- 3 bits
-	data_in <= cnt;
+	data_in <= cnt(38 downto 34);
 	
 fsm: process (pres_state,data_in)
 begin
