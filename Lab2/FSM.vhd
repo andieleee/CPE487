@@ -26,31 +26,46 @@ begin
     when stA =>
         if(data_in = '1') then
         next_state <= stB;
-        else next_state <= stA;
+        data_out <= '0';
+        else 
+        next_state <= stA;
+        data_out <= '0';
         end if;
     when stB =>
         if(data_in = '1') then
         next_state <= stC;
-        else next_state <= stA;
+        data_out <= '0';
+        else
+        next_state <= stA;
+        data_out <= '0';
         end if;
     when stC =>
-        if(data_in = '0') then
+        if(data_in = '1') then
         next_state <= stD;
-        else next_state <= stC;
+        data_out <= '0';
+        else 
+        next_state <= stA;
+        data_out <= '0';
         end if;
     when stD =>
         if(data_in = '1') then
         next_state <= stE;
-        else next_state <= stA;
+        data_out <= '0';
+        else 
+        next_state <= stA;
+        data_out <= '0';
         end if;
     when stE =>
-        if(data_in = '1') then
-        next_state <= stC;
-        else next_state <= stA;
+        if(data_in = '0') then
+        next_state <= stA;
+        data_out <= '1';
+        else 
+        next_state <= stE;
+        data_out <= '0';
         end if;
-    when others => null;
+    when others => next_state <= stA;
 end case;
-end process fsm;
-data_out <= '1' when (pres_state = stE and data_in='1') else '0';          
+end process fsm;      
 end Behavioral;
+
 
