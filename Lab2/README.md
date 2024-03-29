@@ -43,7 +43,7 @@ when stE =>
 ---
 Here are the results of the program:
 
-![](/Lab2/Upload2.png)
+![](/Lab2/upload2.png)
 
 https://github.com/andieleee/CPE487/assets/116908446/0ce85272-3114-42cc-827d-87d9520ee65b
 
