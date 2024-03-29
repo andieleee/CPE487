@@ -19,9 +19,9 @@ We copied our finite state machine over to [counter.vhd](https://github.com/andi
 BEGIN
 	   if rising_edge(clk) then
 		    if(bool = '1') THEN 
-        cnt <= cnt - 1;
+			cnt <= cnt - 1;
 		    else
-		    cnt <= cnt + 1;
+		    	cnt <= cnt + 1;
 		    END IF;
 		pres_state <= next_state;
 		end if;
@@ -31,13 +31,12 @@ In the final state of the machine, when we receive the correct input to complete
 ```
 when stE =>
         if(data_in = '0') then
-        next_state <= stA;
-        data_out <= '1';
-        bool <= bool XOR data_out;
-        
+        	next_state <= stA;
+        	data_out <= '1';
+        	bool <= bool XOR data_out;
         else 
-        next_state <= stE;
-        data_out <= '0';
+        	next_state <= stE;
+        	data_out <= '0';
         end if;
 ```
 ---
