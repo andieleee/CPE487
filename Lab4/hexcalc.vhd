@@ -28,7 +28,7 @@ ARCHITECTURE Behavioral OF hexcalc IS
 	COMPONENT leddec16 IS
 		PORT (
 			dig : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
-			data : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+			data : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
 			anode : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
 			seg : OUT STD_LOGIC_VECTOR (6 DOWNTO 0)
 		);
@@ -36,9 +36,9 @@ ARCHITECTURE Behavioral OF hexcalc IS
 	SIGNAL cnt : std_logic_vector(20 DOWNTO 0); -- counter to generate timing signals
 	SIGNAL kp_clk, kp_hit, sm_clk : std_logic;
 	SIGNAL kp_value : std_logic_vector (3 DOWNTO 0);
-	SIGNAL nx_acc, acc : std_logic_vector (15 DOWNTO 0); -- accumulated sum
-	SIGNAL nx_operand, operand : std_logic_vector (15 DOWNTO 0); -- operand
-	SIGNAL display : std_logic_vector (15 DOWNTO 0); -- value to be displayed
+	SIGNAL nx_acc, acc : std_logic_vector (31 DOWNTO 0); -- accumulated sum
+	SIGNAL nx_operand, operand : std_logic_vector (31 DOWNTO 0); -- operand
+	SIGNAL display : std_logic_vector (31 DOWNTO 0); -- value to be displayed
 	SIGNAL led_mpx : STD_LOGIC_VECTOR (2 DOWNTO 0); -- 7-seg multiplexing clock
 	TYPE state IS (ENTER_ACC, ACC_RELEASE, START_OP, START_OPM, OP_RELEASE, OPM_RELEASE, ENTER_OP, ENTER_OPM, SHOW_RESULT); -- state machine states
 	SIGNAL pr_state, nx_state : state; -- present and next states
@@ -65,8 +65,8 @@ BEGIN
 		sm_ck_pr : PROCESS (bt_clr, sm_clk) -- state machine clock process
 		BEGIN
 			IF bt_clr = '1' THEN -- reset to known state
-				acc <= X"0000";
-				operand <= X"0000";
+				acc <= X"00000000";
+				operand <= X"00000000";
 				pr_state <= ENTER_ACC;
 			ELSIF rising_edge (sm_clk) THEN -- on rising clock edge
 				pr_state <= nx_state; -- update present state
@@ -84,7 +84,7 @@ BEGIN
 			CASE pr_state IS -- depending on present state...
 				WHEN ENTER_ACC => -- waiting for next digit in 1st operand entry
 					IF kp_hit = '1' THEN
-						nx_acc <= acc(11 DOWNTO 0) & kp_value;
+						nx_acc <= acc(27 DOWNTO 0) & kp_value;
 						nx_state <= ACC_RELEASE;
 					ELSIF bt_plus = '1' THEN
 						nx_state <= START_OP;
@@ -100,14 +100,14 @@ BEGIN
 					END IF;
 				WHEN START_OP => -- ready to start entering 2nd operand addition
 					IF kp_hit = '1' THEN
-						nx_operand <= X"000" & kp_value;
+						nx_operand <= X"0000000" & kp_value;
 						nx_state <= OP_RELEASE;
 						display <= operand;
 					ELSE nx_state <= START_OP;
 					END IF;
 				WHEN START_OPM => -- ready to start entering 2nd operand subtraction
 					IF kp_hit = '1' THEN
-						nx_operand <= X"000" & kp_value;
+						nx_operand <= X"0000000" & kp_value;
 						nx_state <= OPM_RELEASE;
 						display <= operand;
 					ELSE nx_state <= START_OPM;
@@ -130,7 +130,7 @@ BEGIN
 						nx_acc <= acc + operand;
 						nx_state <= SHOW_RESULT;
 					ELSIF kp_hit = '1' THEN
-						nx_operand <= operand(11 DOWNTO 0) & kp_value;
+						nx_operand <= operand(27 DOWNTO 0) & kp_value;
 						nx_state <= OP_RELEASE;
 					ELSE nx_state <= ENTER_OP;
 					END IF;
@@ -140,13 +140,13 @@ BEGIN
 						nx_acc <= acc - operand;
 						nx_state <= SHOW_RESULT;
 					ELSIF kp_hit = '1' THEN
-						nx_operand <= operand(11 DOWNTO 0) & kp_value;
+						nx_operand <= operand(27 DOWNTO 0) & kp_value;
 						nx_state <= OPM_RELEASE;
 					ELSE nx_state <= ENTER_OPM;
 					END IF;
 				WHEN SHOW_RESULT => -- display result of operation
 					IF kp_hit = '1' THEN
-						nx_acc <= X"000" & kp_value;
+						nx_acc <= X"0000000" & kp_value;
 						nx_state <= ACC_RELEASE;
 					ELSE nx_state <= SHOW_RESULT;
 					END IF;
