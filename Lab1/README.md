@@ -1,4 +1,4 @@
-# Lab 1
+# Lab 1: Seven-Segment Decoder
 
 > We pledge our honor that we have abided by the Stevens Honor System - Andrew Lee and Kavin Mohan
 
