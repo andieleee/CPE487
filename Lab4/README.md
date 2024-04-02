@@ -9,6 +9,18 @@ While implementing the subtraction and leading-zero suppression functions, we no
 ---
 The addition functionality is designed using a finite state machine to take inputs and add for an output. So for the subtraction functionality, I added a new set of states that the finite machine can go through, exactly the same as for addition but the input values will be subtracted instead of added. These new states were designated by an 'M' in their names to differentiate them from the addition states (ex. START_OPM, OPM_RELEASE, ENTER_OPM).
 
+```
+WHEN ENTER_OPM => -- waiting for next digit in 2nd operand subtraction
+	display <= operand;
+	IF bt_eq = '1' THEN
+		nx_acc <= acc - operand;
+		nx_state <= SHOW_RESULT;
+	ELSIF kp_hit = '1' THEN
+		nx_operand <= operand(27 DOWNTO 0) & kp_value;
+		nx_state <= OPM_RELEASE;
+	ELSE nx_state <= ENTER_OPM;
+```
+
 A new port was also created called 'bt_minus' represent the subtract button being pressed, which was binded to BTND in the constraints file.
 
 ```
