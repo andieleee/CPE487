@@ -5,6 +5,7 @@
 For this lab we were tasked with taking a basic 4-bit hex calculator that can only perform addition and making the calculator also be able to do subtraction and have leading-zero suppression.
 
 While implementing the subtraction and leading-zero suppression functions, we noticed that the calculator is capable of utilizing the 4 unused LEDs with very minor adjustments.
+
 ---
 The addition functionality is designed using a finite state machine to take inputs and add for an output. So for the subtraction functionality, I added a new set of states that the finite machine can go through, exactly the same as for addition but the input values will be subtracted instead of added. These new states were designated by an 'M' in their names to differentiate them from the addition states (ex. START_OPM, OPM_RELEASE, ENTER_OPM).
 
