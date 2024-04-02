@@ -7,7 +7,7 @@ For this lab we were tasked with taking a basic 4-bit hex calculator that can on
 While implementing the subtraction and leading-zero suppression functions, we noticed that the calculator is capable of utilizing the 4 unused LEDs with very minor adjustments.
 
 ---
-The addition functionality is designed using a finite state machine to take inputs and add for an output. So for the subtraction functionality, I added a new set of states that the finite machine can go through, exactly the same as for addition but the input values will be subtracted instead of added. These new states were designated by an 'M' in their names to differentiate them from the addition states (ex. START_OPM, OPM_RELEASE, ENTER_OPM).
+The addition functionality is designed using a finite state machine to take inputs and add for an output. So for the subtraction functionality, I added a new set of states that the finite machine can go through, exactly the same as for addition but the input values will be subtracted instead of added. These new states were designated by a 'M' in their names to differentiate them from the addition states (ex. START_OPM, OPM_RELEASE, ENTER_OPM).
 
 ```
 WHEN ENTER_OPM => -- waiting for next digit in 2nd operand subtraction
@@ -45,7 +45,7 @@ anode <=
 
 ---
 To utilize the 4 unused LEDs, minor changes were added to both files
-In [leddec16.vhd](https://github.com/andieleee/CPE487/blob/main/Lab4/leddec16.vhd), data was changed from `(15 downto 0)` to `(31 downto 0)`, data4 was given additional possible assignments, and anode was uncommented to utilize the other half of the displays.
+In [leddec16.vhd](https://github.com/andieleee/CPE487/blob/main/Lab4/leddec16.vhd), 'data' was changed from `(15 downto 0)` to `(31 downto 0)`. Signal 'data4' was given additional possible assignments, and anode was uncommented to utilize the other half of the displays.
 
 ```
 data4 <=
