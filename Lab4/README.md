@@ -21,7 +21,7 @@ WHEN ENTER_OPM => -- waiting for next digit in 2nd operand subtraction
 	ELSE nx_state <= ENTER_OPM;
 ```
 
-A new port was also created called 'bt_minus' represent the subtract button being pressed, which was binded to BTND in the constraints file.
+A new port was also created called 'bt_minus' represent the subtract button being pressed, which was bound to BTND in the constraints file.
 
 ```
 set_property -dict { PACKAGE_PIN P18   IOSTANDARD LVCMOS33 } [get_ports { bt_minus }]; #IO_L9N_T1_DQS_D13_14 Sch=btnd
