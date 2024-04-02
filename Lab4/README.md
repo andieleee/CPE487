@@ -48,9 +48,24 @@ data4 <=
 ```
 In [hexcalc.vhd](https://github.com/andieleee/CPE487/blob/main/Lab4/hexcalc.vhd), nx_acc, acc, nx_operand, operand, and display were also changed from `(15 downto 0)` to `(31 downto 0)` to allows for the additional values that will be displayed.
 
+```
+SIGNAL  nx_acc, acc : std_logic_vector (31 DOWNTO 0); -- accumulated sum
+	SIGNAL nx_operand, operand : std_logic_vector (31 DOWNTO 0); -- operand
+	SIGNAL display : std_logic_vector (31 DOWNTO 0); -- value to be displayed
+```
+Additional zeros were also added to many of the vectors to accomadate the additional displays.
+
+```
+IF bt_clr = '1' THEN -- reset to known state
+	acc <= X"00000000";
+	operand <= X"00000000";
+	pr_state <= ENTER_ACC;
+```
+
 ---
 These are the results of these modifications:
 
+![](/Lab4/upload4.png)
 
 https://github.com/andieleee/CPE487/assets/116908446/4c8d65c4-fdf2-4f3d-935b-d85a46dd0561 
 
