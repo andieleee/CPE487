@@ -1,4 +1,4 @@
-# Lab 2
+# Lab 2: Four-Digit Hex Counter
 
 > We pledge our honor that we have abided by the Stevens Honor System - Andrew Lee and Kavin Mohan
 
