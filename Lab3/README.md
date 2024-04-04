@@ -31,7 +31,7 @@ BEGIN
 
 In the code block above, the first line is us changing the size of the ball from 8 pixels to 12 pixels.   I added a ball_x_motion below the ball_y_motion that makes the ball move in the x direction.  Originally, I combined all of the motions of the ball under one if statement, but it ran better under multiple if statements.  After the begin line, I changed the color from red to cyan by changing green and blue to one.
 
-The ball would be drawn to the circle equation (x^2+y^2=r^2) instead of four lines of VHDL specifying the boundaries for a square.  In addition, we changed pixel_col, pixel_row, ball_x, and ball_y to integers in order to fully make the ball.  Otherwise, a quarter of the ball would show up.  The video for the movement is below
+The ball would be drawn to the circle equation (x^2+y^2=r^2) instead of four lines of VHDL specifying the boundaries for a square.  We didn't really draw anything, as we just knew this formula from a previous class and decided to use it.  In addition, we changed pixel_col, pixel_row, ball_x, and ball_y to integers in order to fully make the ball.  Otherwise, a quarter of the ball would show up.  The video for the movement is below
 
 
 https://github.com/andieleee/CPE487/assets/65604948/6f0d63b0-aebe-48f4-8ef8-8d1ee7022f0e
