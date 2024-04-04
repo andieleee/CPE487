@@ -36,4 +36,7 @@ The ball would be drawn to the circle equation (x^2+y^2=r^2) instead of four lin
 
 https://github.com/andieleee/CPE487/assets/65604948/6f0d63b0-aebe-48f4-8ef8-8d1ee7022f0e
 
+This is an image of the code running on the Nexys A7
+![image](https://github.com/andieleee/CPE487/assets/65604948/fa157d41-bd16-4357-9f29-a27f1d2e48b4)
+
 
