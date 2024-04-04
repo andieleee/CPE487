@@ -3,7 +3,8 @@
 > We pledge our honor that we have abided by the Stevens Honor System - Andrew Lee and Kavin Mohan
 
 The main point of this lab was to make a ball move around a 600x800 serial monitor.  We were given five files, but only had to change ball.vhd. We had to change the size and color of the ball.  
- . . . ARCHITECTURE Behavioral OF ball IS
+```
+ARCHITECTURE Behavioral OF ball IS
 	CONSTANT size  : INTEGER := 12;
 	SIGNAL ball_on : STD_LOGIC; -- indicates whether ball is over current pixel position
 	-- current ball position - intitialized to center of screen
@@ -25,4 +26,5 @@ BEGIN
 		ELSE
 			ball_on <= '0';
 		END IF;
-		END PROCESS;. . .
+		END PROCESS;
+```
