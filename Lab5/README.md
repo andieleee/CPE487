@@ -33,7 +33,7 @@ w1 : wail
 		);
 		w2 : wail
 		PORT MAP(
-			lo_pitch => hi_tone, -- instantiate wailing siren
+			lo_pitch => hi_tone, -- the low and hi pitches are inversed here to differentiate from the left channel.
 			hi_pitch => lo_tone, 
 			wspeed => wail_speed, 
 			wclk => slo_clk, 
