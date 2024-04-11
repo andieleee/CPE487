@@ -90,4 +90,3 @@ Here are the results:
 ![](/Lab5/upload5.png)
 
 ![Audio file](https://github.com/andieleee/CPE487/blob/main/Lab5/lab5speaker.m4a)
-Audio file: https://github.com/andieleee/CPE487/blob/main/Lab5/lab5speaker.m4a
