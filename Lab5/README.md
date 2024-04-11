@@ -44,4 +44,46 @@ w1 : wail
 ```
 
 ---
+To implement the square wave, firstly we added a signal that controls the wave and makes the program send out a square wave when the button is pressed.
+```
+square_tone : process
+begin
+    if bt_select = '1' then
+        data <= square_data;
+    else
+        data <= tri_data;
+    end if;
+```
+Next, we created the square wave itself that goes back and forth between the two peaks per quadrant for the square shape. In reality, the square wave sounds like a louder version of the sine wave.
+```
+WITH quad SELECT
+	square_data <=  "0011111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000001" WHEN "01", -- 2nd quadrant
+	                "0011111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant
+```
+
+---
+To modify the speed of the signal using 8 switches, we noticed that the speed of the sound is already a vector from 7 downto 0. We created an identical array from 7 downto 0 that is connected to the switches and directly link it to the wail speed.
+```
+ENTITY siren IS
+	PORT (
+		clk_50MHz : IN STD_LOGIC; -- system clock (50 MHz)
+		dac_MCLK : OUT STD_LOGIC; -- outputs to PMODI2L DAC
+		dac_LRCK : OUT STD_LOGIC;
+		dac_SCLK : OUT STD_LOGIC;
+		dac_SDIN : OUT STD_LOGIC;
+		button_select : in std_logic;
+		SW : in unsigned (7 downto 0)  -- new array same size as wail_speed
+		);
+END siren;
+
+ARCHITECTURE Behavioral OF siren IS
+	CONSTANT lo_tone : UNSIGNED (13 DOWNTO 0) := to_unsigned (344, 14); -- lower limit of siren = 256 Hz
+	CONSTANT hi_tone : UNSIGNED (13 DOWNTO 0) := to_unsigned (687, 14); -- upper limit of siren = 512 Hz
+	CONSTANT wail_speed : UNSIGNED (7 DOWNTO 0) := SW; -- sets wailing speed and directly connected to the switches
+```
+
+---
+Here are the results:
 
