@@ -89,4 +89,8 @@ Here are the results:
 
 ![](/Lab5/upload5.png)
 
-![Audio file](https://github.com/andieleee/CPE487/blob/main/Lab5/lab5speaker.m4a)
+The first 11 seconds is the left channel, and the latter half is the right channel. The louder noice is the square signal.
+
+https://github.com/andieleee/CPE487/assets/116908446/6a727046-9b18-4e4e-990c-c0e263f1ad75
+
+
