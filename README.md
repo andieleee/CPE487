@@ -12,5 +12,6 @@ This is where all our lab submissions will be located.
   5. [Lab 5](https://github.com/andieleee/CPE487/tree/main/Lab5)
   6. [Lab 6](https://github.com/andieleee/CPE487/tree/main/Lab6)
 
+## [Final Project](https://github.com/andieleee/CPE487/tree/main/FinalProject)
 
 ![](rolling-cat.gif)
