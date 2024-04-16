@@ -4,3 +4,5 @@
 
 
 idea: playlist speaker, use switches/buttons to switch between different songs (if we can make the thing play songs, this will be viable
+
+idea piano using keypad 
