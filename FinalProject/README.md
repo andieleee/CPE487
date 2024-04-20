@@ -2,7 +2,6 @@
 
 > We pledge our honor that we have abided by the Stevens Honor System - Andrew Lee and Kavin Mohan
 
+Project: Single Octave Piano using Keypad & Speaker
 
-idea: playlist speaker, use switches/buttons to switch between different songs (if we can make the thing play songs, this will be viable
-
-idea piano using keypad 
+Current Progress: Keypad can now change the audio sound, now have to make all the different sounds for each note
