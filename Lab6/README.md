@@ -36,6 +36,11 @@ The final part of the lab involved the switches.  The switches would be a port S
 
 Line 82 is the main line that changes the ball speed in the picture.  Bits 0 to 4 are represented by SW, while bits 5 to 10 have a 0 so that the speed is not changed by the switches further to the left.  The speed of the ball was changed from a constant to a signal in order to get the ball speed to change in the first picture.  
 
+---
+Here is a video of our pong game:
+
+The file is just slightly too big, so the video will be in the files for this lab.
+
 
 
 
