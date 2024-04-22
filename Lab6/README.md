@@ -39,7 +39,10 @@ Line 82 is the main line that changes the ball speed in the picture.  Bits 0 to 
 ---
 Here is a video of our pong game:
 
-The file is just slightly too big, so the video will be in the files for this lab.
+https://github.com/andieleee/CPE487/assets/65604948/c988c039-ac50-47df-9291-b60d3fa574e0
+
+
+
 
 
 
