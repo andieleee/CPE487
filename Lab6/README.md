@@ -10,5 +10,12 @@ The first part of the lab was changing the size of the ball every time the bat h
 
 ![image](https://github.com/andieleee/CPE487/assets/65604948/e8c8fd06-3569-46c1-b6d1-d911a25a8e88)
 
-The im
+Line 88 resets the bat width to 40 when the game starts over
+
+---
+
 ![image](https://github.com/andieleee/CPE487/assets/65604948/c419a722-c74f-4197-ac56-5c0ca5770129)
+
+Line 114 decreases the width of the bat by one when the ball hits it
+
+---
