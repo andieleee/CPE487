@@ -30,6 +30,7 @@ ARCHITECTURE Behavioral OF tone IS
 	
 	signal tri_data: signed (15 downto 0);
 	signal square_data: signed (15 downto 0);
+	signal C,CS,D,DS,E,F,FS,G,GS,A,AS,B: signed (15 downto 0);
 	
 	SIGNAL kp_clk, kp_hit : std_logic;
 	SIGNAL kp_value : std_logic_vector (3 downto 0);
@@ -48,52 +49,116 @@ BEGIN
 	index <= signed ("00" & count (13 DOWNTO 0)); -- 14-bit index into the current phase
 	-- This select statement converts an unsigned 16-bit sawtooth that ranges from 65,535
 	-- into a signed 12-bit triangle wave that ranges from -16,383 to +16,383
+	--WITH quad SELECT
+	--tri_data <= index WHEN "00", -- 1st quadrant
+	            --16383 - index WHEN "01", -- 2nd quadrant
+	            --0 - index WHEN "10", -- 3rd quadrant
+	            --index - 16383 WHEN OTHERS; -- 4th quadrant
+	--WITH quad SELECT
+	--square_data <=  "0011111111111111" WHEN "00", -- 1st quadrant
+	                --"1100000000000001" WHEN "01", -- 2nd quadrant
+	                --"0011111111111111" WHEN "10", -- 3rd quadrant
+	                --"1100000000000001" WHEN OTHERS; -- 4th quadrant 
+    WITH quad SELECT
+    --no noise
+	C <=            "1111111111111111" WHEN "00", -- 1st quadrant
+	                "0000000000000000" WHEN "01", -- 2nd quadrant
+	                "1111111111111111" WHEN "10", -- 3rd quadrant
+	                "0000000000000000" WHEN OTHERS; -- 4th quadrant	  
+    WITH quad SELECT
+    -- no noise
+	CS <=           "0000000000000000" WHEN "00", -- 1st quadrant
+	                "1111111111111111" WHEN "01", -- 2nd quadrant
+	                "0000000000000000" WHEN "10", -- 3rd quadrant
+	                "1111111111111111" WHEN OTHERS; -- 4th quadrant	  
 	WITH quad SELECT
-	tri_data <= index WHEN "00", -- 1st quadrant
-	            16383 - index WHEN "01", -- 2nd quadrant
-	            0 - index WHEN "10", -- 3rd quadrant
-	            index - 16383 WHEN OTHERS; -- 4th quadrant
+	-- louder?
+	D <=            "0001111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000011" WHEN "01", -- 2nd quadrant
+	                "0001111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000011" WHEN OTHERS; -- 4th quadrant
 	WITH quad SELECT
-	square_data <=  "0011111111111111" WHEN "00", -- 1st quadrant
+	DS <=           "0000111111111111" WHEN "00", -- 1st quadrant
+	                "1110000000000011" WHEN "01", -- 2nd quadrant
+	                "0000111111111111" WHEN "10", -- 3rd quadrant
+	                "1110000000000011" WHEN OTHERS; -- 4th quadrant
+	WITH quad SELECT
+	-- having all the same makes no noise
+	E <=            "0000011111111111" WHEN "00", -- 1st quadrant
+	                "0000011111111111" WHEN "01", -- 2nd quadrant
+	                "0000011111111111" WHEN "10", -- 3rd quadrant
+	                "0000011111111111" WHEN OTHERS; -- 4th quadrant
+	WITH quad SELECT
+	-- just sounds more funky
+	F <=            "0011111111111111" WHEN "00", -- 1st quadrant
+	                "0000011111111111" WHEN "01", -- 2nd quadrant
+	                "0011101011111111" WHEN "10", -- 3rd quadrant
+	                "1100000111100001" WHEN OTHERS; -- 4th variable
+	WITH quad SELECT
+	FS <=           "0011111111111111" WHEN "00", -- 1st quadrant
 	                "1100000000000001" WHEN "01", -- 2nd quadrant
 	                "0011111111111111" WHEN "10", -- 3rd quadrant
-	                "1100000000000001" WHEN OTHERS; -- 4th quadrant              
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant
+    WITH quad SELECT
+	G <=            "0011111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000001" WHEN "01", -- 2nd quadrant
+	                "0011111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant
+	WITH quad SELECT
+	GS <=           "0011111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000001" WHEN "01", -- 2nd quadrant
+	                "0011111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant
+	WITH quad SELECT
+	A <=            "0011111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000001" WHEN "01", -- 2nd quadrant
+	                "0011111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant
+	WITH quad SELECT
+	AS <=           "0011111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000001" WHEN "01", -- 2nd quadrant
+	                "0011111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant
+	WITH quad SELECT
+	B <=            "0011111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000001" WHEN "01", -- 2nd quadrant
+	                "0011111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant                                         
 square_tone : process
+-- We will be using the top 3 rows of the keypad for our octave so not using 0,F,E,D
 begin
-    if kp_value = "0000" then
-        data <= tri_data;
-    elsif kp_value = "0001" then
-        data <= square_data;
+    --if kp_value = "0000" then
+        --data <= tri_data;
+    if kp_value = "0001" then
+        data <= C;
     elsif kp_value = "0010" then
-        data <= square_data;
+        data <= CS;
     elsif kp_value = "0011" then
-        data <= square_data;
+        data <= D;
     elsif kp_value = "0100" then
-        data <= square_data;
+        data <= E;
     elsif kp_value = "0101" then
-        data <= square_data;
+        data <= F;
     elsif kp_value = "0110" then
-        data <= square_data;
+        data <= FS;
     elsif kp_value = "0111" then
-        data <= square_data;
+        data <= GS;
     elsif kp_value = "1000" then
-        data <= square_data;
+        data <= A;
     elsif kp_value = "1001" then
-        data <= square_data;
+        data <= AS;
     elsif kp_value = "1010" then
-        data <= square_data;
+        data <= DS;
     elsif kp_value = "1011" then
-        data <= square_data;
+        data <= G;
     elsif kp_value = "1100" then
-        data <= square_data;
-    elsif kp_value = "1101" then
-        data <= square_data;
-    elsif kp_value = "1110" then
-        data <= square_data;
-    elsif kp_value = "1111" then
-        data <= square_data;
-    else
-    data <= tri_data;
+        data <= B;
+    --elsif kp_value = "1101" then
+        --data <= square_data;
+    --elsif kp_value = "1110" then
+        --data <= square_data;
+    --elsif kp_value = "1111" then
+        --data <= square_data;
     end if;
 end process;
 
