@@ -7,7 +7,7 @@ USE IEEE.NUMERIC_STD.ALL;
 ENTITY tone IS
 	PORT (
 		clk : IN STD_LOGIC; -- 48.8 kHz audio sampling clock
-		pitch : IN UNSIGNED (13 DOWNTO 0); -- frequency (in units of 0.745 Hz)
+		pitch : INout UNSIGNED (13 DOWNTO 0); -- frequency (in units of 0.745 Hz)
 	    data : OUT SIGNED (15 DOWNTO 0);
 	    KB_col : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
 	    KB_row : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
@@ -130,29 +130,53 @@ begin
     --if kp_value = "0000" then
         --data <= tri_data;
     if kp_value = "0001" then
-        data <= C;
+    -- C
+        pitch <= "000000010101111";
+        data <= square_data;
     elsif kp_value = "0010" then
-        data <= CS;
+    -- CS
+        pitch <= "000000010111010";
+        data <= square_data;
     elsif kp_value = "0011" then
-        data <= D;
+    -- D
+        pitch <= "000000011000101";
+        data <= square_data;
     elsif kp_value = "0100" then
-        data <= E;
+    -- E
+        pitch <= "000000011011101";
+        data <= square_data;
     elsif kp_value = "0101" then
-        data <= F;
+    -- F
+        pitch <= "000000011101010";
+        data <= square_data;
     elsif kp_value = "0110" then
-        data <= FS;
+    -- FS
+        pitch <= "000000011111000";    
+        data <= square_data;
     elsif kp_value = "0111" then
-        data <= GS;
+    -- GS    
+        pitch <= "000000100010110";
+        data <= square_data;
     elsif kp_value = "1000" then
-        data <= A;
+    -- A    
+        pitch <= "000000100100111";
+        data <= square_data;
     elsif kp_value = "1001" then
-        data <= AS;
+    -- AS    
+        pitch <= "000000100111000";
+        data <= square_data;
     elsif kp_value = "1010" then
-        data <= DS;
+    -- DS    
+        pitch <= "000000011010000";
+        data <= square_data;
     elsif kp_value = "1011" then
-        data <= G;
+    -- G    
+        pitch <= "000000100000111";
+        data <= square_data;
     elsif kp_value = "1100" then
-        data <= B;
+    -- B    
+        pitch <= "000000101001011";
+        data <= square_data;
     --elsif kp_value = "1101" then
         --data <= square_data;
     --elsif kp_value = "1110" then
