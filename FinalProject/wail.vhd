@@ -12,9 +12,9 @@ ENTITY wail IS
 		wspeed : IN UNSIGNED (7 DOWNTO 0); -- speed of wail in pitch units/wclk
 		wclk : IN STD_LOGIC; -- wailing clock (47.6 Hz)
 		audio_clk : IN STD_LOGIC; -- audio sampling clock (48.8 kHz)
-	    audio_data : OUT SIGNED (15 DOWNTO 0); -- output audio sequence (wailing tone)
-	    KB_col1 : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
-	    KB_row1 : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
+	        audio_data : OUT SIGNED (15 DOWNTO 0); -- output audio sequence (wailing tone)
+	        KB_col1 : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
+	        KB_row1 : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
 	    );
 END wail;
 
@@ -25,10 +25,12 @@ ARCHITECTURE Behavioral OF wail IS
 			pitch : IN UNSIGNED (13 DOWNTO 0);
 			data : OUT SIGNED (15 DOWNTO 0);
 			KB_col : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
-	        KB_row : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
+	                KB_row : IN STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad row pins
+	        	modpitch: out unsigned (13 downto 0)
 		);
 	END COMPONENT;
 	SIGNAL curr_pitch : UNSIGNED (13 DOWNTO 0); -- current wailing pitch
+	signal modpitch : unsigned (13 downto 0);
 BEGIN
 	-- this process modulates the current pitch. It keep a variable updn to indicate
 	-- whether tone is currently rising or falling. Each wclk period it increments
@@ -48,6 +50,7 @@ BEGIN
 		ELSE
 			curr_pitch <= curr_pitch - wspeed; -- current value of updn
 		END IF;
+		curr_pitch <= modpitch;
 	END PROCESS;
 	tgen : tone
 	PORT MAP(
@@ -55,6 +58,7 @@ BEGIN
 		pitch => curr_pitch, -- use curr-pitch to modulate tone
 		data => audio_data,
 		KB_col => KB_col1,
-		KB_row => KB_row1
+		KB_row => KB_row1,
+		modpitch => modpitch
 		);
 END Behavioral;
