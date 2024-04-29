@@ -4,4 +4,4 @@
 
 Project: Single Octave Piano using Keypad & Speaker
 
-Current Progress: Keypad can now change the audio sound, now have to make all the different sounds for each note
+Current Progress: piano done WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
