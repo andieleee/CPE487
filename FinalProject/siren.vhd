@@ -10,7 +10,7 @@ ENTITY siren IS
 		dac_SCLK : OUT STD_LOGIC;
 		dac_SDIN : OUT STD_LOGIC;
 		KB_col2 : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
-	    KB_row2 : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
+	        KB_row2 : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
 		);
 END siren;
 
@@ -38,7 +38,7 @@ ARCHITECTURE Behavioral OF siren IS
 			audio_clk : IN STD_LOGIC;
 			audio_data : OUT SIGNED (15 DOWNTO 0);
 			KB_col1 : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
-	        KB_row1 : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
+	                KB_row1 : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
 		);
 	END COMPONENT;
 	SIGNAL tcount : unsigned (19 DOWNTO 0) := (OTHERS => '0'); -- timing counter
