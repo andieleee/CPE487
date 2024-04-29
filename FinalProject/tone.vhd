@@ -3,25 +3,27 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
 -- Generates a 16-bit signed triangle wave sequence at a sampling rate determined
--- by input clk and with a frequency of (clk*pitch)/65,536
+-- by input  clk and with a frequency of (clk*pitch)/65,536
 ENTITY tone IS
 	PORT (
-		clk : IN STD_LOGIC; -- 48.8 kHz audio sampling clock
-		pitch : INout UNSIGNED (13 DOWNTO 0); -- frequency (in units of 0.745 Hz)
+	    clk : IN STD_LOGIC; -- 48.8 kHz audio sampling clock
+	    -- CHANGE PITCH FROM IN TO INOUT
+	    pitch : IN UNSIGNED (13 DOWNTO 0); -- frequency (in units of 0.745 Hz)
 	    data : OUT SIGNED (15 DOWNTO 0);
 	    KB_col : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
-	    KB_row : IN STD_LOGIC_VECTOR (4 DOWNTO 1) -- keypad row pins
+	    KB_row : IN STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad row pins
+	    modpitch: out unsigned (13 downto 0)
 	    );
 END tone;
 
 ARCHITECTURE Behavioral OF tone IS
         COMPONENT keypad IS
 		PORT (
-	    samp_ck : IN STD_LOGIC; -- clock to strobe columns
+	        samp_ck : IN STD_LOGIC; -- clock to strobe columns
 		col : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- output column lines
 		row : IN STD_LOGIC_VECTOR (4 DOWNTO 1); -- input row lines
 		value : OUT STD_LOGIC_VECTOR (3 DOWNTO 0); -- hex value of key depressed
-	    hit : OUT STD_LOGIC -- indicates when a key has been pressed
+	        hit : OUT STD_LOGIC -- indicates when a key has been pressed
 		);
 	END COMPONENT;
 	SIGNAL count : unsigned (15 DOWNTO 0); -- represents current phase of waveform
@@ -54,11 +56,11 @@ BEGIN
 	            --16383 - index WHEN "01", -- 2nd quadrant
 	            --0 - index WHEN "10", -- 3rd quadrant
 	            --index - 16383 WHEN OTHERS; -- 4th quadrant
-	--WITH quad SELECT
-	--square_data <=  "0011111111111111" WHEN "00", -- 1st quadrant
-	                --"1100000000000001" WHEN "01", -- 2nd quadrant
-	                --"0011111111111111" WHEN "10", -- 3rd quadrant
-	                --"1100000000000001" WHEN OTHERS; -- 4th quadrant 
+	WITH quad SELECT
+	square_data <=  "0011111111111111" WHEN "00", -- 1st quadrant
+	                "1100000000000001" WHEN "01", -- 2nd quadrant
+	                "0011111111111111" WHEN "10", -- 3rd quadrant
+	                "1100000000000001" WHEN OTHERS; -- 4th quadrant 
     WITH quad SELECT
     --no noise
 	C <=            "1111111111111111" WHEN "00", -- 1st quadrant
@@ -131,51 +133,51 @@ begin
         --data <= tri_data;
     if kp_value = "0001" then
     -- C
-        pitch <= "000000010101111";
+        modpitch <= "00000010101111";
         data <= square_data;
     elsif kp_value = "0010" then
     -- CS
-        pitch <= "000000010111010";
+        modpitch <= "00000010111010";
         data <= square_data;
     elsif kp_value = "0011" then
     -- D
-        pitch <= "000000011000101";
+        modpitch <= "00000011000101";
         data <= square_data;
     elsif kp_value = "0100" then
     -- E
-        pitch <= "000000011011101";
+        modpitch <= "00000011011101";
         data <= square_data;
     elsif kp_value = "0101" then
     -- F
-        pitch <= "000000011101010";
+        modpitch <= "00000011101010";
         data <= square_data;
     elsif kp_value = "0110" then
     -- FS
-        pitch <= "000000011111000";    
+        modpitch <= "00000011111000";    
         data <= square_data;
     elsif kp_value = "0111" then
     -- GS    
-        pitch <= "000000100010110";
+        modpitch <= "00000100010110";
         data <= square_data;
     elsif kp_value = "1000" then
     -- A    
-        pitch <= "000000100100111";
+        modpitch <= "00000100100111";
         data <= square_data;
     elsif kp_value = "1001" then
     -- AS    
-        pitch <= "000000100111000";
+        modpitch <= "00000100111000";
         data <= square_data;
     elsif kp_value = "1010" then
     -- DS    
-        pitch <= "000000011010000";
+        modpitch <= "00000011010000";
         data <= square_data;
     elsif kp_value = "1011" then
     -- G    
-        pitch <= "000000100000111";
+        modpitch <= "00000100000111";
         data <= square_data;
     elsif kp_value = "1100" then
     -- B    
-        pitch <= "000000101001011";
+        modpitch <= "00000101001011";
         data <= square_data;
     --elsif kp_value = "1101" then
         --data <= square_data;
@@ -183,6 +185,8 @@ begin
         --data <= square_data;
     --elsif kp_value = "1111" then
         --data <= square_data;
+    else
+        modpitch <= "00000000000001";    
     end if;
 end process;
 
