@@ -9,7 +9,7 @@ ENTITY dac_if IS
 		R_start : IN STD_LOGIC; -- strobe to load RIGHT data
 		L_data : IN SIGNED (15 DOWNTO 0); -- LEFT data (15-bit signed)
 		R_data : IN SIGNED (15 DOWNTO 0); -- RIGHT data (15-bit signed)
-	SDATA : OUT STD_LOGIC); -- serial data stream to DAC
+		SDATA : OUT STD_LOGIC); -- serial data stream to DAC
 END dac_if;
 
 ARCHITECTURE Behavioral OF dac_if IS
