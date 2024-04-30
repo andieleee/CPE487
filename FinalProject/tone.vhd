@@ -7,7 +7,6 @@ USE IEEE.NUMERIC_STD.ALL;
 ENTITY tone IS
 	PORT (
 	    clk : IN STD_LOGIC; -- 48.8 kHz audio sampling clock
-	    -- CHANGE PITCH FROM IN TO INOUT
 	    pitch : IN UNSIGNED (13 DOWNTO 0); -- frequency (in units of 0.745 Hz)
 	    data : OUT SIGNED (15 DOWNTO 0);
 	    KB_col : OUT STD_LOGIC_VECTOR (4 DOWNTO 1); -- keypad column pins
