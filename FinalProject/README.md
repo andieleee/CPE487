@@ -5,10 +5,12 @@
 ## Introduction
 
 Utilizing the keypad and the speaker, we created a single-octave piano. Based on the image below as the key to how the piano is mapped, simple songs can be played.
+
 ![](https://cdn.discordapp.com/attachments/1068296443279978527/1232369636046143488/2b1faa071fd33b47e28b964a58745aab.png?ex=66326fa9&is=66311e29&hm=3a9c91a5d55ae53e1fbe080df233c259d9c871b8999d240d1ba79bc56eabbc83&)
 
 ## Demo of the piano octave and Ode to Joy
 
+INSERT DEMO VIDEO HERE
 
 ## Materials
 
@@ -33,3 +35,12 @@ Utilizing the keypad and the speaker, we created a single-octave piano. Based on
    - Note: If siren.bit is not automatically set in the upload, browse to '....\Xilinx\Projects\Piano\Piano.runs\impl_1\siren.bit' to find the bitstream file
 
 ## Modifications
+
+The code is primarily based off lab 5 (DAC Siren) with parts of the lab 4 (Hex Calculator) integrated to utilize the keypad. The major functionalities are:
+    - When a key on the keypad is pressed, a note is played.
+    - No sound is played when the system is idle.
+
+### Core Changes
+
+    
+
