@@ -6,7 +6,7 @@
 
 Utilizing the keypad and the speaker, we created a single-octave piano. Based on the image below as the key to how the piano is mapped, simple songs can be played
 
-## Demo of the piano and Ode to Joy
+## Demo of the piano octave and Ode to Joy
 
 
 ## Materials
