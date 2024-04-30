@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Utilizing the keypad and the speaker, we created a single-scale piano. Based on the image below as the key to how the piano is mapped, simple songs can be played
+Utilizing the keypad and the speaker, we created a single-octave piano. Based on the image below as the key to how the piano is mapped, simple songs can be played
 
 ## Demo of the piano and Ode to Joy
 
@@ -17,9 +17,18 @@ Utilizing the keypad and the speaker, we created a single-scale piano. Based on 
 * 3.5mm Speaker
 
 ## How to Run
-1. Create five sources files of type VHDL called dac_if.vhd, keypad.vhd, siren.vhd, tone.vhd, wail.vhd
-2. Create a constraint file of type XDC called siren.xdc
-3. Choose Nexys A7-100T trainer board for the project
-4. Copy the .vhd and .xdc files in this folder to their respective identical sources and constraint.
-5. Run synthesis, implementation, and generate bitstream
-6. Connect the board to .....
+1. Create a new RTL project in Vivado called Piano
+    - Create five sources files of type VHDL called dac_if.vhd, keypad.vhd, siren.vhd, tone.vhd, wail.vhd
+    - Create a constraint file of type XDC called siren.xdc
+    - Choose Nexys A7-100T trainer board for the project
+2. Copy the .vhd and .xdc files in this folder to their respective identical sources and constraint.
+3. Run synthesis, implementation, and generate bitstream
+4. Connect the hardware:
+   - 3.5mm speaker to the I2S2
+   - I2S2 to the upper pins of port JA on the board
+   - The Keypad to port JB
+   - The board to your computer
+5. Open the hardware manager, click "Open Target" then "Auto Connect" to connect the board. Click "Program Device" then "xc7a100t_0" to upload siren.bit to the board.
+   - Note: If siren.bit is not automatically set in the upload, browse to '....\Xilinx\Projects\Piano\Piano.runs\impl_1\siren.bit' to find the bitstream file
+
+## Modifications
