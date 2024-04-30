@@ -30,9 +30,8 @@ ARCHITECTURE Behavioral OF tone IS
 	SIGNAL quad : std_logic_vector (1 DOWNTO 0); -- current quadrant of phase
 	SIGNAL index : signed (15 DOWNTO 0); -- index into current quadrant
 	
-	signal tri_data: signed (15 downto 0);
+	--signal tri_data: signed (15 downto 0);
 	signal square_data: signed (15 downto 0);
-	signal C,CS,D,DS,E,F,FS,G,GS,A,AS,B: signed (15 downto 0);
 	
 	SIGNAL kp_clk, kp_hit : std_logic;
 	SIGNAL kp_value : std_logic_vector (3 downto 0);
