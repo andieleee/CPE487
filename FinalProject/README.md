@@ -36,9 +36,17 @@ https://github.com/andieleee/CPE487/assets/65604948/8b76b378-14dc-4497-aac0-dc87
 
 ## Modifications
 
-The code is primarily based off lab 5 (DAC Siren) with parts of the lab 4 (Hex Calculator) integrated to utilize the keypad. The major functionalities are:
+The code is primarily based on Lab 5 (DAC Siren) with parts of Lab 4 (Hex Calculator) integrated to utilize the keypad. The major functionalities are:
     - When a key on the keypad is pressed, a note is played.
     - No sound is played when the system is idle.
+
+From Lab 4, we use [keypad.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/keypad.vhd) to be able to utilize the keypad. When a key is pressed, the keypad sends out a value that for our uses is a 4-bit vector of values 0 through 15.
+
+The keypad is made a component of [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd), and while in Lab 5 we created a value called 'bt_select' for a button to switch the mode, we now use the keypad value, 'kp_value' to switch the mode. 
+
+Each individual note corresponds to a frequency, so to create each note, we change the frequency of the signal instead of modifying the shape of the wave. This is done by modifying the value of 'pitch'.
+The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. These calculations are shown with their binary values in the rightmost columns.
+![](https://cdn.discordapp.com/attachments/1068296443279978527/1232377032957231174/image.png?ex=6633c80d&is=6632768d&hm=4bd57339fdb490623bb5a26000d38313aa3e15aadb5506c8ef526f8c44cfb2ca&)
 
 ### Core Changes
 
