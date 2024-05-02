@@ -62,10 +62,9 @@ The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. T
 In [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd)
 ```
 square_tone : process
--- We will be using the top 3 rows of the keypad for our octave so not using 0,F,E,D
 begin
     --if kp_value = "0000" then
-        --data <= tri_data;
+        --data <= square_data;
     if kp_value = "0001" then
     -- C
         modpitch <= "00000010101111";
@@ -136,10 +135,6 @@ end process;
 In [wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd)
 ```
 BEGIN
-	-- this process modulates the current pitch. It keep a variable updn to indicate
-	-- whether tone is currently rising or falling. Each wclk period it increments
-	-- (or decrements) the current pitch by wspeed. When it reaches hi_pitch, it
-	-- starts counting down. When it reaches lo_pitch, it starts counting up
 	wp : PROCESS
 		VARIABLE updn : std_logic;
 	BEGIN
@@ -163,7 +158,7 @@ BEGIN
 		data => audio_data,
 		KB_col => KB_col1,
 		KB_row => KB_row1,
-		modpitch => modpitch
+		modpitch => modpitch 
 		);
 END Behavioral;
 ```
