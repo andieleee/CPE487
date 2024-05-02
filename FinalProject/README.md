@@ -52,6 +52,9 @@ The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. T
 #### Keypad Integration
 - Keypad column and row vectors values added to the constraint file tied to pins for port JB
 - KB_col[] & KB_row[] are out and in std_logic_vectors (4 downto 1) that exist as ports through the entire project (keypad -> tone -> wail -> siren).
+  |[keypad.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/keypad.vhd)|[tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd)|[wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd)|[siren.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/siren.vhd)|[siren.xdc](https://github.com/andieleee/CPE487/blob/main/FinalProject/siren.xdc)|
+  |col|KB_col|KB_col1|KB_col2|KB_col2|
+  |row|KB_row|KB_row1|KB_row2|KB_row2|
 - Signal 'kp_value' added to [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) and mapped to 'value' in [keypad.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/keypad.vhd)
 - Series of elsif-statements for keypad presses. We only uses the upper 3 rows since our piano only has 12 notes.\
 
