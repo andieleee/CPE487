@@ -129,7 +129,7 @@ end process;
 #### Note Creation
 - The same square signal is used for all notes to be constant.
 - Due to 'pitch' being an in bit, we cannot directly assign values to it
-- Extra port called 'modpitch' (modify pitch) created in [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) and as a signal in [wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd)
+- Extra port called 'modpitch' (modify pitch) identical to 'pitch' created in [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) and as a signal in [wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd)
 - The port in [wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd), 'curr_pitch' is mapped to 'pitch' and thus we make the value of 'curr_pitch' be what 'modpitch' is
 - Keypad presses change the value of 'modpitch' which will change the value of 'curr_pitch' and thus change the value of 'pitch' to change the frequency of the sound.
 
