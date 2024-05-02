@@ -71,7 +71,7 @@ begin
         modpitch <= "00000010101111";
         data <= square_data;
     elsif kp_value = "0010" then
-    -- CS
+    -- C#
         modpitch <= "00000010111010";
         data <= square_data;
     elsif kp_value = "0011" then
@@ -87,11 +87,11 @@ begin
         modpitch <= "00000011101010";
         data <= square_data;
     elsif kp_value = "0110" then
-    -- FS
+    -- F#
         modpitch <= "00000011111000";    
         data <= square_data;
     elsif kp_value = "0111" then
-    -- GS    
+    -- G#   
         modpitch <= "00000100010110";
         data <= square_data;
     elsif kp_value = "1000" then
@@ -99,11 +99,11 @@ begin
         modpitch <= "00000100100111";
         data <= square_data;
     elsif kp_value = "1001" then
-    -- AS    
+    -- A#    
         modpitch <= "00000100111000";
         data <= square_data;
     elsif kp_value = "1010" then
-    -- DS    
+    -- D#    
         modpitch <= "00000011010000";
         data <= square_data;
     elsif kp_value = "1011" then
