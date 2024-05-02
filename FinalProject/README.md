@@ -173,3 +173,7 @@ END Behavioral;
 - Signals, 'kp_hit' and 'kp_clk', added to [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) for keypad component
 
 ## Process Summary
+### Development Process & Challenges
+Prior to discovering how to modify the pitch value, Andrew tried modifying the amplitudes of the waves similar to how the triangle and square waves to create each note (Square wave just sounds like a louder triangle wave). This would produce a highly off-tone piano with notes estimated to be in relation to each other. Kavin introduced the idea of creating a second value to edit the value of pitch, significantly reducing the amount of work required and improving the quality of the notes played. 
+### Flaws and Imperfections
+Due to the nature of how the keypad sends key presses, how the program switches between notes, and how notes are created via modifying the pitch value, two keys cannot be pressed simultaneously to create a chord. The keypad is not capable of sending two outputs of different key presses simultaneously and will prioritize the key thats code is present earlier in the if-statements. The pitch is also unable to receive two assignments and is not able to "combine" values to create the unique frequencies chords have in many combinations.
