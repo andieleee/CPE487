@@ -50,6 +50,8 @@ The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. T
 ![](https://cdn.discordapp.com/attachments/1068296443279978527/1232377032957231174/image.png?ex=6633c80d&is=6632768d&hm=4bd57339fdb490623bb5a26000d38313aa3e15aadb5506c8ef526f8c44cfb2ca&)
 
 ### Core Changes
+#### Inputs and Outputs using XDC
+In order to have the ports working, more to be done...
 #### Keypad Integration
 - Keypad column and row vectors values added to the constraint file tied to pins for port JB
 - 'KB_col' & 'KB_row' are out and in std_logic_vectors (4 downto 1) respectively that exist as ports through the entire project (keypad -> tone -> wail -> siren).
