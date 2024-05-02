@@ -10,6 +10,7 @@ Utilizing the keypad and the speaker, we created a single-octave piano. Based on
 
 ## Demo of the piano octave and Ode to Joy
 The speaker is pressed to the microphone
+
 https://github.com/andieleee/CPE487/assets/65604948/8b76b378-14dc-4497-aac0-dc87ade555ad
 
 ## Materials
