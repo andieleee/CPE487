@@ -167,3 +167,9 @@ BEGIN
 		);
 END Behavioral;
 ```
+
+### Minor Changes
+- In [keypad,vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/keypad.vhd), 'value' changed from hex to 4-bit binary values
+- Signals, 'kp_hit' and 'kp_clk', added to [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) for keypad component
+
+## Process Summary
