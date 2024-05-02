@@ -49,6 +49,73 @@ The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. T
 ![](https://cdn.discordapp.com/attachments/1068296443279978527/1232377032957231174/image.png?ex=6633c80d&is=6632768d&hm=4bd57339fdb490623bb5a26000d38313aa3e15aadb5506c8ef526f8c44cfb2ca&)
 
 ### Core Changes
-
-    
-
+#### Keypad Integration
+- Keypad column and row vectors values added to the constraint file tied to pins for port JB
+- KB_col[] & KB_row[] are out and in std_logic_vectors (4 downto 1) that exist as ports through the entire project (keypad -> tone -> wail -> siren).
+- Signal 'kp_value' added to tone.vhd and mapped to 'value' in keypad.vhd
+- Series of elsif-statements for keypad presses. We only uses the upper 3 rows since our piano only has 12 notes.
+```
+square_tone : process
+-- We will be using the top 3 rows of the keypad for our octave so not using 0,F,E,D
+begin
+    --if kp_value = "0000" then
+        --data <= tri_data;
+    if kp_value = "0001" then
+    -- C
+        modpitch <= "00000010101111";
+        data <= square_data;
+    elsif kp_value = "0010" then
+    -- CS
+        modpitch <= "00000010111010";
+        data <= square_data;
+    elsif kp_value = "0011" then
+    -- D
+        modpitch <= "00000011000101";
+        data <= square_data;
+    elsif kp_value = "0100" then
+    -- E
+        modpitch <= "00000011011101";
+        data <= square_data;
+    elsif kp_value = "0101" then
+    -- F
+        modpitch <= "00000011101010";
+        data <= square_data;
+    elsif kp_value = "0110" then
+    -- FS
+        modpitch <= "00000011111000";    
+        data <= square_data;
+    elsif kp_value = "0111" then
+    -- GS    
+        modpitch <= "00000100010110";
+        data <= square_data;
+    elsif kp_value = "1000" then
+    -- A    
+        modpitch <= "00000100100111";
+        data <= square_data;
+    elsif kp_value = "1001" then
+    -- AS    
+        modpitch <= "00000100111000";
+        data <= square_data;
+    elsif kp_value = "1010" then
+    -- DS    
+        modpitch <= "00000011010000";
+        data <= square_data;
+    elsif kp_value = "1011" then
+    -- G    
+        modpitch <= "00000100000111";
+        data <= square_data;
+    elsif kp_value = "1100" then
+    -- B    
+        modpitch <= "00000101001011";
+        data <= square_data;
+    --elsif kp_value = "1101" then
+        --data <= square_data;
+    --elsif kp_value = "1110" then
+        --data <= square_data;
+    --elsif kp_value = "1111" then
+        --data <= square_data;
+    else
+        modpitch <= "00000000000001";    
+    end if;
+end process;
+```
