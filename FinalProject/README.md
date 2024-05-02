@@ -52,8 +52,10 @@ The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. T
 #### Keypad Integration
 - Keypad column and row vectors values added to the constraint file tied to pins for port JB
 - KB_col[] & KB_row[] are out and in std_logic_vectors (4 downto 1) that exist as ports through the entire project (keypad -> tone -> wail -> siren).
-- Signal 'kp_value' added to tone.vhd and mapped to 'value' in keypad.vhd
-- Series of elsif-statements for keypad presses. We only uses the upper 3 rows since our piano only has 12 notes.
+- Signal 'kp_value' added to [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) and mapped to 'value' in [keypad.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/keypad.vhd)
+- Series of elsif-statements for keypad presses. We only uses the upper 3 rows since our piano only has 12 notes.\
+
+In [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd)
 ```
 square_tone : process
 -- We will be using the top 3 rows of the keypad for our octave so not using 0,F,E,D
@@ -118,4 +120,46 @@ begin
         modpitch <= "00000000000001";    
     end if;
 end process;
+```
+
+#### Note Creation
+- The same square signal is used for all notes to be constant.
+- Due to 'pitch' being an in bit, we cannot directly assign values to it
+- Extra port called 'modpitch' (modify pitch) created in [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) and as a signal in [wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd)
+- The port in [wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd), 'curr_pitch' is mapped to 'pitch' and thus we make the value of 'curr_pitch' be what 'modpitch' is
+- Keypad presses change the value of 'modpitch' which will change the value of 'curr_pitch' and thus change the value of 'pitch' to change the frequency of the sound.
+
+In [wail.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/wail.vhd)
+```
+BEGIN
+	-- this process modulates the current pitch. It keep a variable updn to indicate
+	-- whether tone is currently rising or falling. Each wclk period it increments
+	-- (or decrements) the current pitch by wspeed. When it reaches hi_pitch, it
+	-- starts counting down. When it reaches lo_pitch, it starts counting up
+	wp : PROCESS
+		VARIABLE updn : std_logic;
+	BEGIN
+		WAIT UNTIL rising_edge(wclk);
+		IF curr_pitch >= hi_pitch THEN
+			updn := '0'; -- check to see if still in range
+		ELSIF curr_pitch <= lo_pitch THEN
+			updn := '1'; -- if not, adjust updn
+		END IF;
+		IF updn = '1' THEN
+			curr_pitch <= curr_pitch + wspeed; -- modulate pitch according to
+		ELSE
+			curr_pitch <= curr_pitch - wspeed; -- current value of updn
+		END IF;
+		curr_pitch <= modpitch;
+	END PROCESS;
+	tgen : tone
+	PORT MAP(
+		clk => audio_clk, -- instance a tone module
+		pitch => curr_pitch, -- use curr-pitch to modulate tone
+		data => audio_data,
+		KB_col => KB_col1,
+		KB_row => KB_row1,
+		modpitch => modpitch
+		);
+END Behavioral;
 ```
