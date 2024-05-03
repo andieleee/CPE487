@@ -1,14 +1,14 @@
-# Final Project: Piano
+# Final Project: Keyboard
 
 > We pledge our Honor that we have abided by the Stevens Honor System - Andrew Lee and Kavin Mohan
 
 ## Introduction
 
-Utilizing the keypad and the speaker, we created a single-octave piano. Based on the image below as the key to how the piano is mapped, simple songs can be played.
+Utilizing the keypad and the speaker, we created a single-octave keyboard. Based on the image below as the key to how the keyboard is mapped, simple songs can be played.
 
-![Piano Octave Key](https://github.com/andieleee/CPE487/assets/65604948/6bde9756-8956-40f3-8657-b59192900fb0)
+![Keyboard Octave Key](https://github.com/andieleee/CPE487/assets/65604948/6bde9756-8956-40f3-8657-b59192900fb0)
 
-## Demo of the piano octave and Ode to Joy
+## Demo of the keyboard octave and Ode to Joy
 The speaker is pressed to the microphone
 
 https://github.com/andieleee/CPE487/assets/65604948/8b76b378-14dc-4497-aac0-dc87ade555ad
@@ -21,7 +21,7 @@ https://github.com/andieleee/CPE487/assets/65604948/8b76b378-14dc-4497-aac0-dc87
 * 3.5mm Speaker
 
 ## How to Run
-1. Create a new RTL project in Vivado called Piano
+1. Create a new RTL project in Vivado called Keyboard
     - Create five sources files of type VHDL called dac_if.vhd, keypad.vhd, siren.vhd, tone.vhd, wail.vhd
     - Create a constraint file of type XDC called siren.xdc
     - Choose Nexys A7-100T trainer board for the project
@@ -33,7 +33,7 @@ https://github.com/andieleee/CPE487/assets/65604948/8b76b378-14dc-4497-aac0-dc87
    - The Keypad to port JB
    - The board to your computer
 5. Open the hardware manager, click "Open Target" then "Auto Connect" to connect the board. Click "Program Device" then "xc7a100t_0" to upload siren.bit to the board.
-   - Note: If siren.bit is not automatically set in the upload, browse to '....\Xilinx\Projects\Piano\Piano.runs\impl_1\siren.bit' to find the bitstream file
+   - Note: If siren.bit is not automatically set in the upload, browse to '....\Xilinx\Projects\Keyboard\Keyboard.runs\impl_1\siren.bit' to find the bitstream file
 
 ## Modifications
 
@@ -60,7 +60,7 @@ In order to have the ports working, more to be done...
   |col|KB_col|KB_col1|KB_col2|KB_col2|
   |row|KB_row|KB_row1|KB_row2|KB_row2|
 - Signal 'kp_value' added to [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd) and mapped to 'value' in [keypad.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/keypad.vhd)
-- Series of elsif-statements for keypad presses. We only uses the upper 3 rows since our piano only has 12 notes.\
+- Series of elsif-statements for keypad presses. We only uses the upper 3 rows since our keyboard only has 12 notes.\
 
 In [tone.vhd](https://github.com/andieleee/CPE487/blob/main/FinalProject/tone.vhd)
 ```
@@ -172,7 +172,7 @@ END Behavioral;
 
 ## Process Summary
 ### Development Process & Challenges
-Prior to discovering how to modify the pitch value, Andrew tried modifying the amplitudes of the waves similar to how the triangle and square waves to create each note (Square wave just sounds like a louder triangle wave). This would produce a highly off-tone piano with notes estimated to be in relation to each other. Kavin introduced the idea of creating a second value to edit the value of pitch, significantly reducing the amount of work required and improving the quality of the notes played. 
+Prior to discovering how to modify the pitch value, Andrew tried modifying the amplitudes of the waves similar to how the triangle and square waves to create each note (Square wave just sounds like a louder triangle wave). This would produce a highly off-tone keyboard with notes estimated to be in relation to each other. Kavin introduced the idea of creating a second value to edit the value of pitch, significantly reducing the amount of work required and improving the quality of the notes played. 
 ### Flaws and Imperfections
 Due to the nature of how the keypad sends key presses, how the program switches between notes, and how notes are created via modifying the pitch value, two keys cannot be pressed simultaneously to create a chord. The keypad is not capable of sending two outputs of different key presses simultaneously and will prioritize the key thats code is present earlier in the if-statements. The pitch is also unable to receive two assignments and is not able to "combine" values to create the unique frequencies chords have in many combinations.
 
