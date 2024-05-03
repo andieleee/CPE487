@@ -53,7 +53,6 @@ The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. T
 #### Inputs and Outputs using XDC
 In order to have the ports working, we had to modify the XDC file.  This mainly combined the constraints from lab 4 and lab 5.
 ```
-
 set_property -dict { PACKAGE_PIN D18 IOSTANDARD LVCMOS33 } [get_ports { dac_LRCK }]; #IO_L21N_T3_DQS_A18_15 Sch=ja[2]
 set_property -dict { PACKAGE_PIN E18 IOSTANDARD LVCMOS33 } [get_ports { dac_SCLK }]; #IO_L21P_T3_DQS_15 Sch=ja[3]
 set_property -dict { PACKAGE_PIN G17 IOSTANDARD LVCMOS33 } [get_ports { dac_SDIN }]; #IO_L18N_T2_A23_15 Sch=ja[4]
