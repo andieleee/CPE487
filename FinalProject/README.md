@@ -143,21 +143,21 @@ BEGIN
 	BEGIN
 		WAIT UNTIL rising_edge(wclk);
 		IF curr_pitch >= hi_pitch THEN
-			updn := '0'; -- check to see if still in range
+			updn := '0';
 		ELSIF curr_pitch <= lo_pitch THEN
-			updn := '1'; -- if not, adjust updn
+			updn := '1';
 		END IF;
 		IF updn = '1' THEN
-			curr_pitch <= curr_pitch + wspeed; -- modulate pitch according to
+			curr_pitch <= curr_pitch + wspeed;
 		ELSE
-			curr_pitch <= curr_pitch - wspeed; -- current value of updn
+			curr_pitch <= curr_pitch - wspeed;
 		END IF;
 		curr_pitch <= modpitch;
 	END PROCESS;
 	tgen : tone
 	PORT MAP(
-		clk => audio_clk, -- instance a tone module
-		pitch => curr_pitch, -- use curr-pitch to modulate tone
+		clk => audio_clk,
+		pitch => curr_pitch,
 		data => audio_data,
 		KB_col => KB_col1,
 		KB_row => KB_row1,
