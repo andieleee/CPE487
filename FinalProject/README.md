@@ -51,7 +51,28 @@ The math to figure out the value of pitch is: (Frequency of Note Hz)/0.745 Hz. T
 
 ### Core Changes
 #### Inputs and Outputs using XDC
-In order to have the ports working, more to be done...
+In order to have the ports working, we had to modify the XDC file.  This mainly combined the constraints from lab 4 and lab 5.
+```
+
+set_property -dict { PACKAGE_PIN D18 IOSTANDARD LVCMOS33 } [get_ports { dac_LRCK }]; #IO_L21N_T3_DQS_A18_15 Sch=ja[2]
+set_property -dict { PACKAGE_PIN E18 IOSTANDARD LVCMOS33 } [get_ports { dac_SCLK }]; #IO_L21P_T3_DQS_15 Sch=ja[3]
+set_property -dict { PACKAGE_PIN G17 IOSTANDARD LVCMOS33 } [get_ports { dac_SDIN }]; #IO_L18N_T2_A23_15 Sch=ja[4]
+set_property -dict { PACKAGE_PIN C17 IOSTANDARD LVCMOS33 } [get_ports { dac_MCLK }]; #IO_L20N_T3_A19_15 Sch=ja[1]
+```
+The constraints above allowed the dac to be used as a port.  The three clock signals LRCK, SCLK, amd MCLK are used, as well as the serial input SDIN. 
+
+```
+set_property -dict { PACKAGE_PIN D14   IOSTANDARD LVCMOS33 } [get_ports { KB_col2[4] }]; #IO_L20N_T3_A19_15 Sch=jb[1]
+set_property -dict { PACKAGE_PIN F16   IOSTANDARD LVCMOS33 } [get_ports { KB_col2[3] }]; #IO_L21N_T3_DQS_A18_15 Sch=jb[2]
+set_property -dict { PACKAGE_PIN G16   IOSTANDARD LVCMOS33 } [get_ports { KB_col2[2] }]; #IO_L21P_T3_DQS_15 Sch=jb[3]
+set_property -dict { PACKAGE_PIN H14   IOSTANDARD LVCMOS33 } [get_ports { KB_col2[1] }]; #IO_L18N_T2_A23_15 Sch=jb[4]
+set_property -dict { PACKAGE_PIN E16   IOSTANDARD LVCMOS33 } [get_ports { KB_row2[4] }]; #IO_L16N_T2_A27_15 Sch=jb[7]
+set_property -dict { PACKAGE_PIN F13   IOSTANDARD LVCMOS33 } [get_ports { KB_row2[3] }]; #IO_L16P_T2_A28_15 Sch=jb[8]
+set_property -dict { PACKAGE_PIN G13   IOSTANDARD LVCMOS33 } [get_ports { KB_row2[2] }]; #IO_L22N_T3_A16_15 Sch=jb[9]
+set_property -dict { PACKAGE_PIN H16   IOSTANDARD LVCMOS33 } [get_ports { KB_row2[1] }]; #IO_L22P_T3_A17_15 Sch=jb[10]
+```
+The keypad was controlled through these constraint lines.  The only thing we changed was KB_row and KB_col with KB_row2 and KB_col2 respectively.  This is mentioned later in the keypad integration section.
+
 #### Keypad Integration
 - Keypad column and row vectors values added to the constraint file tied to pins for port JB
 - 'KB_col' & 'KB_row' are out and in std_logic_vectors (4 downto 1) respectively that exist as ports through the entire project (keypad -> tone -> wail -> siren).
